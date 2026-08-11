@@ -292,9 +292,10 @@
                                 <p class="text-[10px] font-bold text-[#E98B9F] mb-2">＼初回限定30%OFFで申し込む／</p>
                                 <div class="flex flex-col items-center gap-1.5">
                                     <span class="inline-flex items-center gap-1 bg-gradient-to-br from-amber-300 to-amber-500 text-white text-[9px] font-black px-2.5 py-0.5 rounded-full shadow">🎁 特典</span>
-                                    <div id="qr-standard" class="bg-white p-1 inline-block border-2 border-[#E98B9F] rounded-lg shadow-[0_0_16px_rgba(233,139,159,0.5)] animate-pulse"></div>
+                                    <div class="bg-white p-1 inline-block border-2 border-[#E98B9F] rounded-lg shadow-[0_0_16px_rgba(233,139,159,0.5)] animate-pulse">
+                                        <img src="qr_2_80.png" alt="QRコード" class="w-[110px] h-[110px] object-contain block">
+                                    </div>
                                 </div>
-                                <div class="text-[0.6rem] text-gray-300 break-all mt-1" id="url-standard"></div>
                             </div>
                         </div>
 
@@ -330,9 +331,10 @@
                                 <p class="text-[10px] font-bold text-gray-400 mb-2">＼こちらからお申し込み／</p>
                                 <div class="flex flex-col items-center gap-1.5">
                                     <span class="inline-flex items-center gap-1 bg-gradient-to-br from-amber-300 to-amber-500 text-white text-[9px] font-black px-2.5 py-0.5 rounded-full shadow">🎁 特典</span>
-                                    <div id="qr-special" class="bg-white p-1 inline-block border-2 border-amber-300 rounded-lg shadow-inner"></div>
+                                    <div class="bg-white p-1 inline-block border-2 border-amber-300 rounded-lg shadow-inner">
+                                        <img src="qr_2_110.png" alt="QRコード" class="w-[100px] h-[100px] object-contain block">
+                                    </div>
                                 </div>
-                                <div class="text-[0.6rem] text-gray-300 break-all mt-1" id="url-special"></div>
                             </div>
                         </div>
                     </div>
@@ -491,11 +493,9 @@
 
 <script>
     // ===== データ =====
-    // 松竹梅3プラン（月2回ペース固定）の決済リンク
+    // ライトプランの決済リンク（スタンダード・スペシャルは月2回30%OFFの固定QR画像を使用）
     const SUBS_LINKS = {
-        light:    "https://web.online.airpayment.jp/payment?planId=PLhtHxKHt7br1Du3Tq", // ライト 50分 15%OFF
-        standard: "https://web.online.airpayment.jp/payment?planId=PL6gR6mo9UUaXndEXZ", // スタンダード 80分 初回限定30%OFF
-        special:  "https://web.online.airpayment.jp/payment?planId=PLs3a2BD8VxfJWjCnI"  // スペシャル 110分 30%OFF
+        light: "https://web.online.airpayment.jp/payment?planId=PLhtHxKHt7br1Du3Tq" // ライト 50分 15%OFF
     };
 
     const phaseDetails = [
@@ -505,17 +505,9 @@
     ];
 
     window.onload = () => {
-        const qrLight    = new QRCode(document.getElementById("qr-light"),    { width: 100, height: 100 });
-        const qrStandard = new QRCode(document.getElementById("qr-standard"), { width: 110, height: 110 });
-        const qrSpecial  = new QRCode(document.getElementById("qr-special"),  { width: 100, height: 100 });
-
+        const qrLight = new QRCode(document.getElementById("qr-light"), { width: 100, height: 100 });
         qrLight.makeCode(SUBS_LINKS.light);
-        qrStandard.makeCode(SUBS_LINKS.standard);
-        qrSpecial.makeCode(SUBS_LINKS.special);
-
-        document.getElementById('url-light').innerText    = SUBS_LINKS.light;
-        document.getElementById('url-standard').innerText = SUBS_LINKS.standard;
-        document.getElementById('url-special').innerText  = SUBS_LINKS.special;
+        document.getElementById('url-light').innerText = SUBS_LINKS.light;
 
         updatePhase(0);
     };
